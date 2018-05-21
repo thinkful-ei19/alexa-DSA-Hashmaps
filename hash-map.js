@@ -32,12 +32,21 @@ class HashMap {
     }
 
     const index = this._findSlot(key);
-    this._slots[index] = {
-      key,
-      value,
-      deleted: false
-    };
-    this.length++;
+
+    if (this._slots[index] === undefined) {
+      this._slots[index] = {
+        key,
+        value,
+        deleted: false
+      };
+      this.length++; // only increment when key is unique
+    } else if (this._slots[index].key === key) {
+      this._slots[index] = {
+        key,
+        value,
+        deleted: false
+      };
+    }
   }
 
   remove(key) {
@@ -88,24 +97,44 @@ const lor = new HashMap();
 
 function main() {
   lor.set('Hobbit', 'Bilbo');
-  lor.set('Hobbit', 'Frodo');
-//   lor.set('Wizard', 'Gandolf');
-//   lor.set('Human', 'Aragon');
-//   lor.set('Elf', 'Legolas');
+  lor.set('Hobbit', 'Frodo'); // => replaces Bilbo
+  lor.set('Wizard', 'Gandolf');
+  lor.set('Human', 'Aragon');
+  lor.set('Elf', 'Legolas');
   lor.set('Maiar', 'The Necromancer');
-  lor.set('Maiar', 'Sauron');
-//   lor.set('RingBearer', 'Gollum');
-//   lor.set('LadyOfLight', 'Galadriel');
-//   lor.set('HalfElven', 'Arwen');
-//   lor.set('Ent', 'Treebeard');
+  lor.set('Maiar', 'Sauron'); // => replaces The Necromancer
+  lor.set('RingBearer', 'Gollum');
+  lor.set('LadyOfLight', 'Galadriel');
+  lor.set('HalfElven', 'Arwen');
+  lor.set('Ent', 'Treebeard');
+  // length should be 9 not 11
 
-//   console.log(lor.get('Wizard'));
-//   console.log(lor.get('Maiar'));
+  console.log(lor.get('Wizard'));
+  //   console.log(lor.get('Maiar'));
 
-console.log(lor.get('Hobbit'));
+  //   console.log(lor.get('Hobbit'));
 
 
   console.log(JSON.stringify(lor, null, 2));
 }
 
 main();
+
+// create a helper function - check if it contains key
+// containKey(map, key)
+// for loop - slots length
+// use get method - if key returns twice, then
+
+// palindrome -> if every char in string going to have an even number except for one will be odd
+// identify even and odd char
+// hash map helps because it would lower the complexity
+// split string into letters
+// calc odd or even 
+// key -> each letter
+// value -> how many times you've seen it 
+
+// "racecar"
+// r- 2, a- 2, c- 2, e- 1
+// anything else - only one char could have just one occur
+
+//racecars - not a palindrome
