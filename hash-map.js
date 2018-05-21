@@ -166,7 +166,7 @@ function palindrome(str) {
     }
   }
 
-//   console.log(JSON.stringify(map, null, 2));
+  // console.log(JSON.stringify(map, null, 2));
   
   const oddKeys = new HashMap();
 
@@ -186,6 +186,31 @@ function palindrome(str) {
   }
 }
 
-console.log(palindrome('racecar'));
-console.log(palindrome('dad'));
-console.log(palindrome('alexa'));
+// console.log(palindrome('racecar'));
+// console.log(palindrome('dad'));
+// console.log(palindrome('alexa'));
+
+
+// 1. create hashMap
+//
+function anagram(arrOfWords) {
+  const map = new HashMap();
+
+  // loops through arr of words
+  for (let i=0; i<arrOfWords.length; i++) {
+    let ascCount = 0;
+    // loops through each word in array
+    for (let j=0; j<arrOfWords[i].length; j++) {
+      ascCount = ascCount + arrOfWords[i].charCodeAt(j);
+      map.set(arrOfWords[i], ascCount);
+    }
+    
+    
+    // console.log(`${arrOfWords[i]} -> ${ascCount}`);
+  }
+  console.log('this is map', map);
+
+  // let map = new HashMap();
+}
+
+anagram(['east', 'cars', 'acre', 'arcs', 'teas', 'eats', 'race']); // => true
