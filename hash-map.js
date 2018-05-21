@@ -109,13 +109,10 @@ function main() {
   lor.set('Ent', 'Treebeard');
   // length should be 9 not 11
 
-  console.log(lor.get('Wizard'));
-  //   console.log(lor.get('Maiar'));
+//   console.log(lor.get('Wizard'));
+//   console.log(lor.get('Maiar'));
 
-  //   console.log(lor.get('Hobbit'));
-
-
-  console.log(JSON.stringify(lor, null, 2));
+//   console.log(JSON.stringify(lor, null, 2));
 }
 
 main();
@@ -138,3 +135,57 @@ main();
 // anything else - only one char could have just one occur
 
 //racecars - not a palindrome
+
+function containsKey(hashMap, key) {
+  for(let i=0; i<hashMap._slots.length; i++) {
+    if (hashMap.get(key)) {
+      return true;
+    }
+  }
+  return false;
+}
+
+// console.log(containsKey(lor, 'Hobbit'));
+
+// 1. split string into letters
+// 2. set Arr to hashMap
+
+function palindrome(str) {
+  const strToArr = str.toLowerCase().split('');
+  
+  let map = new HashMap();
+  let counter = 1;
+
+  for (let i=0; i<strToArr.length; i++) {
+    const charAt = strToArr[i];
+    try {
+      containsKey(map, charAt);
+      map.set(charAt, map.get(charAt) + 1);
+    } catch (e) {
+      map.set(charAt, counter);
+    }
+  }
+
+//   console.log(JSON.stringify(map, null, 2));
+  
+  const oddKeys = new HashMap();
+
+  for (let i=0; i<strToArr.length; i++) {
+    let value = map.get(strToArr[i]);
+    if (value % 2 === 0) {
+      continue;
+    } else {
+      oddKeys.set(strToArr[i], value);
+    }
+  }
+
+  if (oddKeys.length > 1) {
+    return false;
+  } else {
+    return true;
+  }
+}
+
+console.log(palindrome('racecar'));
+console.log(palindrome('dad'));
+console.log(palindrome('alexa'));
